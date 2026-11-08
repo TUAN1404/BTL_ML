@@ -43,9 +43,10 @@ def clean_king_county():
         df["sale_month"] = df["date"].dt.month
         df = df.drop(columns=["date"])
 
-    # 4. Tạo feature: house_age và renovated
+    # 4. Tạo feature: house_age và renovated, bỏ yr_renovated
     df["house_age"] = df["sale_year"] - df["yr_built"]
     df["renovated"] = (df["yr_renovated"] > 0).astype(int)
+    df = df.drop(columns=["yr_renovated"])
 
     out_file = os.path.join(PROCESSED_DIR, "d1_clean.csv")
     df.to_csv(out_file, index=False)

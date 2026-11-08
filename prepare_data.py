@@ -59,16 +59,20 @@ def prepare_dataset_1():
     d1_train.drop(columns=["id"], inplace=True)
     d1_test.drop(columns=["id"], inplace=True)
 
-    # 4. Lưu vào data/processed/
+    # 4. Lưu vào data/processed/ (bao gồm cả file clean tổng thể)
     os.makedirs(DATA_PROCESSED, exist_ok=True)
     train_file = os.path.join(DATA_PROCESSED, "d1_train.csv")
     test_file = os.path.join(DATA_PROCESSED, "d1_test.csv")
+    clean_file = os.path.join(DATA_PROCESSED, "d1_clean.csv")
 
     d1_train.to_csv(train_file, index=False)
     d1_test.to_csv(test_file, index=False)
+    d1_clean = df_clean.drop(columns=["id"])
+    d1_clean.to_csv(clean_file, index=False)
 
     print(f"[V] Đã lưu d1_train.csv: {d1_train.shape[0]:,} dòng × {d1_train.shape[1]} cột")
     print(f"[V] Đã lưu d1_test.csv : {d1_test.shape[0]:,} dòng × {d1_test.shape[1]} cột")
+    print(f"[V] Đã lưu d1_clean.csv: {d1_clean.shape[0]:,} dòng × {d1_clean.shape[1]} cột")
 
     return d1_train, d1_test
 
@@ -109,16 +113,19 @@ def prepare_dataset_2():
         df_clean = clean_d2(df_train_raw)
         d2_train, d2_test = train_test_split(df_clean, test_size=0.2, random_state=42)
 
-    # 2. Lưu vào data/processed/
+    # 2. Lưu vào data/processed/ (bao gồm cả file clean tổng thể)
     os.makedirs(DATA_PROCESSED, exist_ok=True)
     train_file = os.path.join(DATA_PROCESSED, "d2_train.csv")
     test_file = os.path.join(DATA_PROCESSED, "d2_test.csv")
+    clean_file = os.path.join(DATA_PROCESSED, "d2_clean.csv")
 
     d2_train.to_csv(train_file, index=False)
     d2_test.to_csv(test_file, index=False)
+    df_clean.to_csv(clean_file, index=False)
 
     print(f"[V] Đã lưu d2_train.csv: {d2_train.shape[0]:,} dòng × {d2_train.shape[1]} cột")
     print(f"[V] Đã lưu d2_test.csv : {d2_test.shape[0]:,} dòng × {d2_test.shape[1]} cột")
+    print(f"[V] Đã lưu d2_clean.csv: {df_clean.shape[0]:,} dòng × {df_clean.shape[1]} cột")
 
     return d2_train, d2_test
 
