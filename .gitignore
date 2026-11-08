@@ -1,0 +1,18 @@
+# Dữ liệu gốc dung lượng lớn
+data/raw/
+
+# Model checkpoints & weights
+models/*.pkl
+
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environment
+.venv/
+env/
+venv/
+
